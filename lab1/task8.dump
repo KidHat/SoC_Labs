@@ -1,0 +1,172 @@
+
+task8.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+000100b4 <sum_negative>:
+   100b4:	fd010113          	addi	sp,sp,-48
+   100b8:	02112623          	sw	ra,44(sp)
+   100bc:	02812423          	sw	s0,40(sp)
+   100c0:	03010413          	addi	s0,sp,48
+   100c4:	fca42e23          	sw	a0,-36(s0)
+   100c8:	fe042623          	sw	zero,-20(s0)
+   100cc:	fe042423          	sw	zero,-24(s0)
+   100d0:	0a00006f          	j	10170 <sum_negative+0xbc>
+   100d4:	fe042223          	sw	zero,-28(s0)
+   100d8:	0800006f          	j	10158 <sum_negative+0xa4>
+   100dc:	fe842703          	lw	a4,-24(s0)
+   100e0:	00070793          	mv	a5,a4
+   100e4:	00179793          	slli	a5,a5,0x1
+   100e8:	00e787b3          	add	a5,a5,a4
+   100ec:	00379793          	slli	a5,a5,0x3
+   100f0:	00078713          	mv	a4,a5
+   100f4:	fdc42783          	lw	a5,-36(s0)
+   100f8:	00e78733          	add	a4,a5,a4
+   100fc:	fe442783          	lw	a5,-28(s0)
+   10100:	00279793          	slli	a5,a5,0x2
+   10104:	00f707b3          	add	a5,a4,a5
+   10108:	0007a783          	lw	a5,0(a5)
+   1010c:	0407d063          	bgez	a5,1014c <sum_negative+0x98>
+   10110:	fe842703          	lw	a4,-24(s0)
+   10114:	00070793          	mv	a5,a4
+   10118:	00179793          	slli	a5,a5,0x1
+   1011c:	00e787b3          	add	a5,a5,a4
+   10120:	00379793          	slli	a5,a5,0x3
+   10124:	00078713          	mv	a4,a5
+   10128:	fdc42783          	lw	a5,-36(s0)
+   1012c:	00e78733          	add	a4,a5,a4
+   10130:	fe442783          	lw	a5,-28(s0)
+   10134:	00279793          	slli	a5,a5,0x2
+   10138:	00f707b3          	add	a5,a4,a5
+   1013c:	0007a783          	lw	a5,0(a5)
+   10140:	fec42703          	lw	a4,-20(s0)
+   10144:	00f707b3          	add	a5,a4,a5
+   10148:	fef42623          	sw	a5,-20(s0)
+   1014c:	fe442783          	lw	a5,-28(s0)
+   10150:	00178793          	addi	a5,a5,1
+   10154:	fef42223          	sw	a5,-28(s0)
+   10158:	fe442703          	lw	a4,-28(s0)
+   1015c:	00500793          	li	a5,5
+   10160:	f6e7dee3          	bge	a5,a4,100dc <sum_negative+0x28>
+   10164:	fe842783          	lw	a5,-24(s0)
+   10168:	00178793          	addi	a5,a5,1
+   1016c:	fef42423          	sw	a5,-24(s0)
+   10170:	fe842703          	lw	a4,-24(s0)
+   10174:	00500793          	li	a5,5
+   10178:	f4e7dee3          	bge	a5,a4,100d4 <sum_negative+0x20>
+   1017c:	fec42783          	lw	a5,-20(s0)
+   10180:	00078513          	mv	a0,a5
+   10184:	02c12083          	lw	ra,44(sp)
+   10188:	02812403          	lw	s0,40(sp)
+   1018c:	03010113          	addi	sp,sp,48
+   10190:	00008067          	ret
+
+00010194 <main>:
+   10194:	ff010113          	addi	sp,sp,-16
+   10198:	00112623          	sw	ra,12(sp)
+   1019c:	00812423          	sw	s0,8(sp)
+   101a0:	01010413          	addi	s0,sp,16
+   101a4:	000117b7          	lui	a5,0x11
+   101a8:	1bc78513          	addi	a0,a5,444 # 111bc <matrix>
+   101ac:	f09ff0ef          	jal	100b4 <sum_negative>
+   101b0:	00050713          	mv	a4,a0
+   101b4:	88e1a823          	sw	a4,-1904(gp) # 1124c <g_result>
+   101b8:	0000006f          	j	101b8 <main+0x24>
+
+Disassembly of section .data:
+
+000111bc <matrix>:
+   111bc:	00000003          	lb	zero,0(zero) # 0 <sum_negative-0x100b4>
+   111c0:	ffff                	.insn	2, 0xffff
+   111c2:	ffff                	.insn	2, 0xffff
+   111c4:	0005                	.insn	2, 0x0005
+   111c6:	0000                	.insn	2, 0x0000
+   111c8:	fff9                	.insn	2, 0xfff9
+   111ca:	ffff                	.insn	2, 0xffff
+   111cc:	0002                	.insn	2, 0x0002
+   111ce:	0000                	.insn	2, 0x0000
+   111d0:	0000                	.insn	2, 0x0000
+   111d2:	0000                	.insn	2, 0x0000
+   111d4:	fffc                	.insn	2, 0xfffc
+   111d6:	ffff                	.insn	2, 0xffff
+   111d8:	0006                	.insn	2, 0x0006
+   111da:	0000                	.insn	2, 0x0000
+   111dc:	fffe                	.insn	2, 0xfffe
+   111de:	ffff                	.insn	2, 0xffff
+   111e0:	0001                	.insn	2, 0x0001
+   111e2:	0000                	.insn	2, 0x0000
+   111e4:	fffd                	.insn	2, 0xfffd
+   111e6:	ffff                	.insn	2, 0xffff
+   111e8:	0005                	.insn	2, 0x0005
+   111ea:	0000                	.insn	2, 0x0000
+   111ec:	0009                	.insn	2, 0x0009
+   111ee:	0000                	.insn	2, 0x0000
+   111f0:	fff8                	.insn	2, 0xfff8
+   111f2:	ffff                	.insn	2, 0xffff
+   111f4:	00000007          	.insn	4, 0x0007
+   111f8:	fffa                	.insn	2, 0xfffa
+   111fa:	ffff                	.insn	2, 0xffff
+   111fc:	0004                	.insn	2, 0x0004
+   111fe:	0000                	.insn	2, 0x0000
+   11200:	ffff                	.insn	2, 0xffff
+   11202:	ffff                	.insn	2, 0xffff
+   11204:	fffffffb          	.insn	4, 0xfffffffb
+   11208:	fffffffb          	.insn	4, 0xfffffffb
+   1120c:	0002                	.insn	2, 0x0002
+   1120e:	0000                	.insn	2, 0x0000
+   11210:	0002                	.insn	2, 0x0002
+   11212:	0000                	.insn	2, 0x0000
+   11214:	fffffff7          	.insn	4, 0xfffffff7
+   11218:	00000003          	lb	zero,0(zero) # 0 <sum_negative-0x100b4>
+   1121c:	0000                	.insn	2, 0x0000
+   1121e:	0000                	.insn	2, 0x0000
+   11220:	0004                	.insn	2, 0x0004
+   11222:	0000                	.insn	2, 0x0000
+   11224:	fffc                	.insn	2, 0xfffc
+   11226:	ffff                	.insn	2, 0xffff
+   11228:	fffc                	.insn	2, 0xfffc
+   1122a:	ffff                	.insn	2, 0xffff
+   1122c:	0008                	.insn	2, 0x0008
+   1122e:	0000                	.insn	2, 0x0000
+   11230:	fffe                	.insn	2, 0xfffe
+   11232:	ffff                	.insn	2, 0xffff
+   11234:	0001                	.insn	2, 0x0001
+   11236:	0000                	.insn	2, 0x0000
+   11238:	0002                	.insn	2, 0x0002
+   1123a:	0000                	.insn	2, 0x0000
+   1123c:	00000003          	lb	zero,0(zero) # 0 <sum_negative-0x100b4>
+   11240:	fffd                	.insn	2, 0xfffd
+   11242:	ffff                	.insn	2, 0xffff
+   11244:	ffff                	.insn	2, 0xffff
+   11246:	ffff                	.insn	2, 0xffff
+   11248:	fff6                	.insn	2, 0xfff6
+   1124a:	ffff                	.insn	2, 0xffff
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347          	.insn	4, 0x3a434347
+   4:	2820                	.insn	2, 0x2820
+   6:	29554e47          	.insn	4, 0x29554e47
+   a:	3120                	.insn	2, 0x3120
+   c:	2e35                	.insn	2, 0x2e35
+   e:	2e32                	.insn	2, 0x2e32
+  10:	0030                	.insn	2, 0x0030
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1b41                	.insn	2, 0x1b41
+   2:	0000                	.insn	2, 0x0000
+   4:	7200                	.insn	2, 0x7200
+   6:	7369                	.insn	2, 0x7369
+   8:	01007663          	bgeu	zero,a6,14 <sum_negative-0x100a0>
+   c:	0011                	.insn	2, 0x0011
+   e:	0000                	.insn	2, 0x0000
+  10:	1004                	.insn	2, 0x1004
+  12:	7205                	.insn	2, 0x7205
+  14:	3376                	.insn	2, 0x3376
+  16:	6932                	.insn	2, 0x6932
+  18:	7032                	.insn	2, 0x7032
+  1a:	0031                	.insn	2, 0x0031

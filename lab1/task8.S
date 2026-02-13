@@ -1,11 +1,9 @@
 .data
-
 N:
 .word 6
 M:
 .word 6
 
-# 6x6 matrix with mixed positive and negative values
 matrix:
 .word   3,  -1,   5,  -7,   2,   0
 .word  -4,   6,  -2,   1,  -3,   5
@@ -19,35 +17,56 @@ sum:
 
 .text
 .globl main
+.globl sum_negative
 
 main:
-    la   t0, matrix     # t0 = pointer to current element
-    li   t1, 36         # t1 = remaining element count (6*6)
-    addi t2, x0, 0      # t2 = running sum
+    # a0 = base address of matrix
+    la   a0, matrix
+    # a1 = number of elements (6 * 6)
+    li   a1, 36
+
+    # call sum_negative(a0, a1), result in a0
+    jal  ra, sum_negative
+
+    # save result to memory (optional, for visibility)
+    la   t0, sum
+    sw   a0, 0(t0)
+
+    # print result (Venus syscall: a0=1, a1=value)
+    add  t1, a0, x0
+    li   a0, 1
+    add  a1, t1, x0
+    ecall
+
+    # print newline
+    li   a0, 11
+    li   a1, 10
+    ecall
+
+    # exit
+    li   a0, 10
+    ecall
+
+# ----------------------------------------------------
+# int sum_negative(int* data, int count)
+# a0 = pointer to first element
+# a1 = number of elements
+# return a0 = sum of negative elements
+# ----------------------------------------------------
+sum_negative:
+    add  t0, a0, x0      # t0 = current pointer
+    add  t1, a1, x0      # t1 = remaining count
+    li   t2, 0           # t2 = sum
 
 loop:
-    beq  t1, x0, done   # if no elements left -> exit loop
-    lw   t3, 0(t0)      # load current element
-    addi t0, t0, 4      # advance pointer
-    addi t1, t1, -1     # decrement counter
-    blt  t3, x0, add_neg
-    j    loop
-
-add_neg:
-    add  t2, t2, t3     # accumulate negative value
+    beq  t1, x0, done
+    lw   t3, 0(t0)
+    addi t0, t0, 4
+    addi t1, t1, -1
+    bge  t3, x0, loop
+    add  t2, t2, t3
     j    loop
 
 done:
-    la   t4, sum
-    sw   t2, 0(t4)      # store result
-
-    addi a0, x0, 1      # print_int
-    add  a1, t2, x0
-    ecall
-
-    addi a0, x0, 11     # print_character
-    addi a1, x0, 10     # newline
-    ecall
-
-    addi a0, x0, 10     # exit
-    ecall
+    add  a0, t2, x0
+    jalr x0, 0(ra)
